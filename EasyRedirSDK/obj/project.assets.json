@@ -53,11 +53,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedir\\EasyRedir\\EasyRedir.csproj",
-      "projectName": "EasyRedir",
-      "projectPath": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedir\\EasyRedir\\EasyRedir.csproj",
+      "projectUniqueName": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedirSDK\\EasyRedirSDK.csproj",
+      "projectName": "EasyRedirSDK",
+      "projectPath": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedirSDK\\EasyRedirSDK.csproj",
       "packagesPath": "C:\\Users\\Jon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedir\\EasyRedir\\obj\\",
+      "outputPath": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedirSDK\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jon\\AppData\\Roaming\\NuGet\\NuGet.Config",
