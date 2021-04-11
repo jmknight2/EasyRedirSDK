@@ -10,10 +10,10 @@ namespace EasyRedir.Model
     public class EasyRedirRuleAttributes
     {
         [JsonPropertyName("forward_params")]
-        public bool ForwardParams { get; set; }
+        public bool? ForwardParams { get; set; }
 
         [JsonPropertyName("forward_path")]
-        public bool ForwardPath { get; set; }
+        public bool? ForwardPath { get; set; }
 
         [JsonPropertyName("response_type")]
         public string ResponseType { get; set; }
@@ -24,7 +24,7 @@ namespace EasyRedir.Model
         [JsonPropertyName("target_url")]
         public Uri TargetUrl { get; set; }
 
-        EasyRedirRuleAttributes() { }
+        public EasyRedirRuleAttributes() { }
 
         public EasyRedirRuleAttributes(bool forwardParams, bool forwardPath, string responseType, string[] sourceUrls, Uri targetUrl)
         {

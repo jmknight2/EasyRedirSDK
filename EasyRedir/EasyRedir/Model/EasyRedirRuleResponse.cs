@@ -10,6 +10,7 @@ namespace EasyRedir.Model
     public class EasyRedirRuleResponse
     {
         [JsonPropertyName("data")]
+        [JsonConverter(typeof(SingleOrArrayConverter<EasyRedirRule>))]
         public List<EasyRedirRule> Data { get; set; }
 
         [JsonPropertyName("meta")]

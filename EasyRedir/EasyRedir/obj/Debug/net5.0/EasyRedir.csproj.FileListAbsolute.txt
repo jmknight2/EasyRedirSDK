@@ -10,3 +10,15 @@ C:\Users\Jon\source\repos\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.csproj.
 C:\Users\Jon\source\repos\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.dll
 C:\Users\Jon\source\repos\EasyRedir\EasyRedir\obj\Debug\net5.0\ref\EasyRedir.dll
 C:\Users\Jon\source\repos\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.pdb
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.csprojAssemblyReference.cache
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.AssemblyInfoInputs.cache
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.AssemblyInfo.cs
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.csproj.CoreCompileInputs.cache
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.dll
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\ref\EasyRedir.dll
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\obj\Debug\net5.0\EasyRedir.pdb
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\bin\Debug\net5.0\EasyRedir.deps.json
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\bin\Debug\net5.0\EasyRedir.dll
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\bin\Debug\net5.0\ref\EasyRedir.dll
+C:\Users\Jon\Repos\EasyRedirSDK\EasyRedir\EasyRedir\bin\Debug\net5.0\EasyRedir.pdb
