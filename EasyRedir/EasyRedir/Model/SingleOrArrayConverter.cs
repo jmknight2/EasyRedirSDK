@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Collections;
 
-namespace EasyRedir.Model
+namespace EasyRedirSDK.Model
 {
 
 	/*

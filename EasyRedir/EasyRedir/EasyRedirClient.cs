@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using EasyRedir.Model;
+using EasyRedirSDK.Model;
 
-namespace EasyRedir
+namespace EasyRedirSDK
 {
     public class EasyRedirClient
     {
