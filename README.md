@@ -67,3 +67,32 @@ var createResponse = await easyRedirClient.CreateEasyRedirRule( new EasyRedirRul
     ResponseType = EasyRedirResponseType.MovedPermanently
 });
 ```
+
+## Error Handling
+Any errors thrown from the API will be thrown in code as a custom exception object: `EasyRedirException`. This exception object contains several properties that can tell you more about why your call failed. The `Errors` property specifically gives you a detailed list of every error in your code, and how to correct those errors. In the exapmle below we attmept to create a redirect rule that already exists. By parsing the error details in the exception object, we can determine the root cause of the error.
+```C#
+try {
+    var createResponse = await easyRedirClient.CreateEasyRedirRule(new EasyRedirRuleAttributes {
+        TargetUrl = new Uri("https://google.com"),
+        SourceUrls = new string[] {
+            "google.example1.com",
+            "google.example2.com"
+        },
+        ForwardParams = false,
+        ForwardPath = false,
+        ResponseType = EasyRedirResponseType.MovedPermanently
+    });
+} catch (EasyRedirException exc) {
+    Console.WriteLine("------------ Generic Error ------------");
+    Console.WriteLine(String.Format("Error Type: ", exc.ErrorType));
+    Console.WriteLine(String.Format("Error Message: ", exc.ErrorMessage));
+
+    foreach (var errorObj in exc.Errors) {
+        Console.WriteLine("------------ Specific Errors ------------");
+        Console.WriteLine(String.Format("Error Code: ", errorObj.Code));
+        Console.WriteLine(String.Format("Error Message: ", errorObj.Message));
+        Console.WriteLine(String.Format("Resource: ", errorObj.Resource));
+        Console.WriteLine(String.Format("Param: ", errorObj.Param));
+    }
+}
+```
