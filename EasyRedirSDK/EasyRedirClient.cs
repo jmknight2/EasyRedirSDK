@@ -47,6 +47,35 @@ namespace EasyRedirSDK
             return await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync());
         }
 
+        // Gets the specified number of rules, where the source and target Urls match the values specified. Limit defaults to 25.
+        public async Task<EasyRedirRuleResponse> GetEasyRedirRules(string sourceUrl, string targetUrl, int limit = 25)
+        {
+            var requestUri = String.Format("/v1/rules?limit={0}", limit);
+            
+            if (!String.IsNullOrWhiteSpace(sourceUrl)) 
+            {
+                requestUri += String.Format("&sq={0}", sourceUrl);
+            }
+
+            if (!String.IsNullOrWhiteSpace(targetUrl))
+            {
+                requestUri += String.Format("&tq={0}", targetUrl);
+            }
+
+            var req = new HttpRequestMessage(HttpMethod.Get, requestUri);
+
+            var responseMessage = client.SendAsync(req).Result;
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                var exc = await JsonSerializer.DeserializeAsync<EasyRedirException>(await responseMessage.Content.ReadAsStreamAsync());
+
+                throw exc;
+            }
+
+            return await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync());
+        }
+
         // Gets a list of rules based on the pageToken passed in. This is really meant to be used as a subsequent call after getting a page token. 
         public async Task<EasyRedirRuleResponse> GetEasyRedirRules(string pageToken)
         {
