@@ -11,5 +11,12 @@ namespace EasyRedirSDK.Model
     {
         [JsonPropertyName("self")]
         public string Self { get; set; }
+
+        public EasyRedirHostLinks() {}
+
+        public EasyRedirHostLinks(string self)
+        {
+            Self = self;
+        }
     }
 }

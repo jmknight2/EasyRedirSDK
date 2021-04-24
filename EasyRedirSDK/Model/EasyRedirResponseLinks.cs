@@ -15,6 +15,8 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("prev")]
         public string Prev { get; set; }
 
+        public EasyRedirResponseLinks() {}
+
         public EasyRedirResponseLinks(string next, string prev)
         {
             this.Next = next;

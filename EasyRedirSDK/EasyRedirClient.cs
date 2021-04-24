@@ -99,7 +99,7 @@ namespace EasyRedirSDK
         }
 
         // Gets a single host with the specified ID.
-        public async Task<EasyRedirHostResponse> GetEasyRedirHost(Guid Id)
+        public async Task<EasyRedirHost> GetEasyRedirHost(Guid Id)
         {
             var req = new HttpRequestMessage(HttpMethod.Get, ("/v1/hosts/" + Id));
 
@@ -112,7 +112,31 @@ namespace EasyRedirSDK
                 throw exc;
             }
 
-            return await JsonSerializer.DeserializeAsync<EasyRedirHostResponse>(await responseMessage.Content.ReadAsStreamAsync());
+            var hostResponse = await JsonSerializer.DeserializeAsync<EasyRedirHostResponse>(await responseMessage.Content.ReadAsStreamAsync());
+
+            return hostResponse.Data[0];
+        }
+
+        public async Task<EasyRedirHost> UpdateEasyRedirHost(Guid Id, EasyRedirHostAttributes HostAttributes)
+        {
+            JsonSerializerOptions serializerOptions = new()
+            {
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            };
+
+            var req = new HttpRequestMessage(HttpMethod.Patch, ("/v1/hosts/" + Id));
+            req.Content = new StringContent(Encoding.Default.GetString(JsonSerializer.SerializeToUtf8Bytes(HostAttributes, serializerOptions)), Encoding.UTF8, "application/json");
+
+            var responseMessage = await client.SendAsync(req);
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                var exc = await JsonSerializer.DeserializeAsync<EasyRedirException>(await responseMessage.Content.ReadAsStreamAsync());
+
+                throw exc;
+            }
+
+            return await JsonSerializer.DeserializeAsync<EasyRedirHost>(await responseMessage.Content.ReadAsStreamAsync(), serializerOptions);
         }
 
         // Creates a new EasyRedir rule. This overload is for multiple SourceUrls.

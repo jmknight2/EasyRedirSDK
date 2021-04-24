@@ -12,9 +12,11 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("has_more")]
         public bool HasMore { get; set; }
 
+        public EasyRedirResponseMeta() {}
+
         public EasyRedirResponseMeta(bool hasMore)
         {
-            this.HasMore = hasMore;
+            HasMore = hasMore;
         }
     }
 }
