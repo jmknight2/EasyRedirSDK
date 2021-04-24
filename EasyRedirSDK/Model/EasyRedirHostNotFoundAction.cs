@@ -18,6 +18,9 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("custom_404_body_present")]
         public bool Custom404BodyPresent { get; set; }
 
+        [JsonPropertyName("custom_404_body")]
+        public string Custom404Body { get; set; }
+
         [JsonPropertyName("response_code")]
         public int ResponseCode { get; set; }
 
@@ -31,6 +34,15 @@ namespace EasyRedirSDK.Model
             ForwardParams = forwardParams;
             ForwardPath = forwardPath;
             Custom404BodyPresent = custom404BodyPresent;
+            ResponseCode = responseCode;
+            ResponseUrl = responseUrl;
+        }
+
+        public EasyRedirHostNotFoundAction(bool forwardParams, bool forwardPath, string custom404Body, int responseCode, Uri responseUrl)
+        {
+            ForwardParams = forwardParams;
+            ForwardPath = forwardPath;
+            Custom404Body = custom404Body;
             ResponseCode = responseCode;
             ResponseUrl = responseUrl;
         }
