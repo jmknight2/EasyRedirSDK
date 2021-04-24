@@ -30,10 +30,18 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("detected_dns_entries")]
         public List<EasyRedirDnsRecord> DetectedDnsEntries { get; set; }
 
-        EasyRedirHostAttributes() { }
+        [JsonPropertyName("match_options")]
+        public EasyRedirHostMatchOptions MatchOptions { get; set; }
 
-        public EasyRedirHostAttributes(string name, string dnsStatus, string dnsTestedAt, string certificateStatus, bool acmeEnabled, EasyRedirHostRequiredDnsEntries requiredDnsEntries, List<EasyRedirDnsRecord> detectedDnsEntries)
-        {
+        [JsonPropertyName("not_found_action")]
+        public EasyRedirHostNotFoundAction NotFoundAction { get; set; }
+
+        [JsonPropertyName("security")]
+        public EasyRedirHostSecurity Security { get; set; }
+
+        public EasyRedirHostAttributes() {}
+
+        public EasyRedirHostAttributes(string name, string dnsStatus, string dnsTestedAt, string certificateStatus, bool acmeEnabled, EasyRedirHostRequiredDnsEntries requiredDnsEntries, List<EasyRedirDnsRecord> detectedDnsEntries, EasyRedirHostMatchOptions matchOptions, EasyRedirHostNotFoundAction notFoundAction, EasyRedirHostSecurity security) {
             Name = name;
             DnsStatus = dnsStatus;
             DnsTestedAt = dnsTestedAt;
@@ -41,6 +49,9 @@ namespace EasyRedirSDK.Model
             AcmeEnabled = acmeEnabled;
             RequiredDnsEntries = requiredDnsEntries;
             DetectedDnsEntries = detectedDnsEntries;
+            MatchOptions = matchOptions;
+            NotFoundAction = notFoundAction;
+            Security = security;
         }
     }
 }

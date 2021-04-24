@@ -15,9 +15,7 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("values")]
         public string[] Values { get; set; }
 
-        public EasyRedirDnsRecord()
-        {
-        }
+        public EasyRedirDnsRecord() {}
 
         public EasyRedirDnsRecord(string type, string[] values)
         {

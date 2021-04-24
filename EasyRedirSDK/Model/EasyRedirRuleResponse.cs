@@ -19,6 +19,8 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("links")]
         public EasyRedirResponseLinks Links { get; set; }
 
+        public EasyRedirRuleResponse() {}
+
         public EasyRedirRuleResponse(List<EasyRedirRule> data, EasyRedirResponseMeta meta, EasyRedirResponseLinks links) {
             this.Data = data;
             this.Meta = meta;
