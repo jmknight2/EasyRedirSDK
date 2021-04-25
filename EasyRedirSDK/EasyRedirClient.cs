@@ -47,6 +47,35 @@ namespace EasyRedirSDK
             return await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync());
         }
 
+        // Gets the specified number of rules, where the source and target Urls match the values specified. Limit defaults to 25.
+        public async Task<EasyRedirRuleResponse> GetEasyRedirRules(string sourceUrl, string targetUrl, int limit = 25)
+        {
+            var requestUri = String.Format("/v1/rules?limit={0}", limit);
+            
+            if (!String.IsNullOrWhiteSpace(sourceUrl)) 
+            {
+                requestUri += String.Format("&sq={0}", sourceUrl);
+            }
+
+            if (!String.IsNullOrWhiteSpace(targetUrl))
+            {
+                requestUri += String.Format("&tq={0}", targetUrl);
+            }
+
+            var req = new HttpRequestMessage(HttpMethod.Get, requestUri);
+
+            var responseMessage = client.SendAsync(req).Result;
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                var exc = await JsonSerializer.DeserializeAsync<EasyRedirException>(await responseMessage.Content.ReadAsStreamAsync());
+
+                throw exc;
+            }
+
+            return await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync());
+        }
+
         // Gets a list of rules based on the pageToken passed in. This is really meant to be used as a subsequent call after getting a page token. 
         public async Task<EasyRedirRuleResponse> GetEasyRedirRules(string pageToken)
         {
@@ -140,14 +169,21 @@ namespace EasyRedirSDK
         }
 
         // Creates a new EasyRedir rule. This overload is for multiple SourceUrls.
-        public async Task<EasyRedirHostResponse> CreateEasyRedirRule(Uri TargetUrl, string[] SourceUrls, string ResponseType=EasyRedirResponseType.MovedPermanently, bool ForwardParams=false, bool ForwardPath = false)
+        public async Task<EasyRedirRule> CreateEasyRedirRule(Uri TargetUrl, string[] SourceUrls, string ResponseType=EasyRedirResponseType.MovedPermanently, bool ForwardParams=false, bool ForwardPath = false, bool includeRelationships = true)
         {
+            var requestUri = "/v1/rules";
+
+            if (includeRelationships)
+            {
+                requestUri += String.Format("?include[]=relationship");
+            }
+
             var newRule = new EasyRedirRuleAttributes(ForwardParams, ForwardPath, ResponseType, SourceUrls, TargetUrl);
             var reqContent = new StringContent(Encoding.Default.GetString(JsonSerializer.SerializeToUtf8Bytes(newRule)), Encoding.UTF8, "application/json");
 
             Console.WriteLine(Encoding.Default.GetString(JsonSerializer.SerializeToUtf8Bytes(newRule)));
 
-            var responseMessage = await client.PostAsync("/v1/rules", reqContent);
+            var responseMessage = await client.PostAsync(requestUri, reqContent);
 
             if (!responseMessage.IsSuccessStatusCode) {
                 var exc = await JsonSerializer.DeserializeAsync<EasyRedirException>(await responseMessage.Content.ReadAsStreamAsync());
@@ -155,21 +191,30 @@ namespace EasyRedirSDK
                 throw exc;
             }
 
-            return await JsonSerializer.DeserializeAsync<EasyRedirHostResponse>(await responseMessage.Content.ReadAsStreamAsync());
+            var ruleResponse = await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync());
+
+            return ruleResponse.Data[0];
         }
 
         // Creates a new EasyRedir rule. This overload is for only a single SourceUrl, and essentially just wraps that URL in a single item array and passes it to the above overload.
-        public async Task<EasyRedirHostResponse> CreateEasyRedirRule(Uri TargetUrl, string SourceUrl, string ResponseType = EasyRedirResponseType.MovedPermanently, bool ForwardParams = false, bool ForwardPath = false)
+        public async Task<EasyRedirRule> CreateEasyRedirRule(Uri TargetUrl, string SourceUrl, string ResponseType = EasyRedirResponseType.MovedPermanently, bool ForwardParams = false, bool ForwardPath = false, bool includeRelationships = true)
         {
-            return await CreateEasyRedirRule(TargetUrl, new string[] { SourceUrl }, ResponseType, ForwardParams, ForwardPath);
+            return await CreateEasyRedirRule(TargetUrl, new string[] { SourceUrl }, ResponseType, ForwardParams, ForwardPath, includeRelationships);
         }
 
         // Creates a new EasyRedir rule. This overload accepts an object which can be easier to build, but all properties are required.
-        public async Task<EasyRedirHostResponse> CreateEasyRedirRule(EasyRedirRuleAttributes RuleAttributes)
+        public async Task<EasyRedirRule> CreateEasyRedirRule(EasyRedirRuleAttributes RuleAttributes, bool includeRelationships = true)
         {
+            var requestUri = "/v1/rules";
+
+            if (includeRelationships)
+            {
+                requestUri += String.Format("?include[]=relationship");
+            }
+
             var reqContent = new StringContent(Encoding.Default.GetString(JsonSerializer.SerializeToUtf8Bytes(RuleAttributes)), Encoding.UTF8, "application/json");
 
-            var responseMessage = await client.PostAsync("/v1/rules", reqContent);
+            var responseMessage = await client.PostAsync(requestUri, reqContent);
 
             if (!responseMessage.IsSuccessStatusCode)
             {
@@ -178,18 +223,28 @@ namespace EasyRedirSDK
                 throw exc;
             }
 
-            return await JsonSerializer.DeserializeAsync<EasyRedirHostResponse>(await responseMessage.Content.ReadAsStreamAsync());
+            var ruleResponse = await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync());
+
+            return ruleResponse.Data[0];
         }
 
         // Updates the rule with the ID specified, making the passed in the RuleAttributes object.
-        public async Task<EasyRedirRuleResponse> UpdateEasyRedirRule(Guid Id, EasyRedirRuleAttributes RuleAttributes)
+        public async Task<EasyRedirRule> UpdateEasyRedirRule(Guid Id, EasyRedirRuleAttributes RuleAttributes, bool includeRelationships=true)
         {
+            var requestUri = "/v1/rules/" + Id;
+
+            if (includeRelationships)
+            {
+                requestUri += String.Format("?include[]=relationship");
+            }
+
+            var req = new HttpRequestMessage(HttpMethod.Patch, requestUri);
+
             JsonSerializerOptions serializerOptions = new()
             {
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
 
-            var req = new HttpRequestMessage(HttpMethod.Patch, ("/v1/rules/" + Id));
             req.Content = new StringContent(Encoding.Default.GetString(JsonSerializer.SerializeToUtf8Bytes(RuleAttributes, serializerOptions)), Encoding.UTF8, "application/json");
 
             var responseMessage = await client.SendAsync(req);
@@ -201,7 +256,9 @@ namespace EasyRedirSDK
                 throw exc;
             }
 
-            return await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync(), serializerOptions);
+            var ruleResponse = await JsonSerializer.DeserializeAsync<EasyRedirRuleResponse>(await responseMessage.Content.ReadAsStreamAsync(), serializerOptions);
+
+            return ruleResponse.Data[0];
         }
 
         // Removes the rule with the specified ID. 

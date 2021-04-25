@@ -18,12 +18,17 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("attributes")]
         public EasyRedirRuleAttributes Attributes { get; set; }
 
+        [JsonPropertyName("relationships")]
+        public EasyRedirRelationship Relationships { get; set; }
+
         public EasyRedirRule() {}
 
-        public EasyRedirRule(Guid id, string type, EasyRedirRuleAttributes attributes) {
-            this.Id = id;
-            this.Type = type;
-            this.Attributes = attributes;
+        public EasyRedirRule(Guid id, string type, EasyRedirRuleAttributes attributes, EasyRedirRelationship relationships)
+        {
+            Id = id;
+            Type = type;
+            Attributes = attributes;
+            Relationships = relationships;
         }
     }
 }
