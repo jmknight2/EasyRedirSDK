@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "p4rt3MsOW3ouTvhN1kbUQOKtEg+PgsWEyomVCtQd/GEk53794LZC54bGnbHJUc9O/bRu039NhHMb2XANk/9tCw==",
+  "dgSpecHash": "NPArMzjM0T+t+KCrlHvjA8V6q4r80mE9B/TILy9O3lsiGNnGoOaJhoWbJ1gfAYFb6nXJfbQxnPHpeAuLX5ROxg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jon\\Repos\\EasyRedirSDK\\EasyRedirSDK\\EasyRedirSDK.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Jon\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

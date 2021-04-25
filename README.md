@@ -84,15 +84,15 @@ try {
     });
 } catch (EasyRedirException exc) {
     Console.WriteLine("------------ Generic Error ------------");
-    Console.WriteLine(String.Format("Error Type: ", exc.ErrorType));
-    Console.WriteLine(String.Format("Error Message: ", exc.ErrorMessage));
+    Console.WriteLine(String.Format("Error Type: {0}", exc.ErrorType));
+    Console.WriteLine(String.Format("Error Message: {0}", exc.ErrorMessage));
 
     foreach (var errorObj in exc.Errors) {
         Console.WriteLine("------------ Specific Errors ------------");
-        Console.WriteLine(String.Format("Error Code: ", errorObj.Code));
-        Console.WriteLine(String.Format("Error Message: ", errorObj.Message));
-        Console.WriteLine(String.Format("Resource: ", errorObj.Resource));
-        Console.WriteLine(String.Format("Param: ", errorObj.Param));
+        Console.WriteLine(String.Format("Error Code: {0}", errorObj.Code));
+        Console.WriteLine(String.Format("Error Message: {0}", errorObj.Message));
+        Console.WriteLine(String.Format("Resource: {0}", errorObj.Resource));
+        Console.WriteLine(String.Format("Param: {0}", errorObj.Param));
     }
 }
 ```
