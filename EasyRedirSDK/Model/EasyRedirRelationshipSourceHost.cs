@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace EasyRedirSDK.Model
 {
-    public class EasyRedirDnsRecord
+    public class EasyRedirRelationshipSourceHost
     {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonPropertyName("values")]
-        public string[] Values { get; set; }
+        public EasyRedirRelationshipSourceHost() {}
 
-        public EasyRedirDnsRecord() {}
-
-        public EasyRedirDnsRecord(string type, string[] values)
+        public EasyRedirRelationshipSourceHost(Guid id, string type)
         {
+            Id = id;
             Type = type;
-            Values = values;
         }
     }
 }

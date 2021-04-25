@@ -15,9 +15,7 @@ namespace EasyRedirSDK.Model
         [JsonPropertyName("alternatives")]
         public List<EasyRedirDnsRecord> Alternatives { get; set; }
 
-        public EasyRedirHostRequiredDnsEntries()
-        {
-        }
+        public EasyRedirHostRequiredDnsEntries() {}
 
         public EasyRedirHostRequiredDnsEntries(EasyRedirDnsRecord recommended, List<EasyRedirDnsRecord> alternatives)
         {
