@@ -7,7 +7,7 @@ Here we'll discuss how to add a reference to the library in your own code, and e
 ## Referencing The Library
 The library is not currently hosted in NuGet, so for now, you'll need to reference it like a typical DLL flat file. 
 
-1. Download the fully compiled DLL file [here](https://github.com/jmknight2/EasyRedirSDK/releases/tag/v1.0).
+1. Download the fully compiled DLL file [here](https://github.com/jmknight2/EasyRedirSDK/releases).
 2. Open your solution in Visual Studio.
 3. Right-click on your project in the solution explorer and choose either "Add Reference" or "Add Project Reference" depending on your version of Visual Studio.
 4. Click the "Browse" buton on the bottom right, and select the DLL you downloaded in step 1.
