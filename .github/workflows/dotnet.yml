@@ -24,5 +24,5 @@ jobs:
     - name: Publish EasyRedirSDK
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-          PROJECT_FILE_PATH: EasyRedirSDK.csproj
+          PROJECT_FILE_PATH: EasyRedirSDK/EasyRedirSDK.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
