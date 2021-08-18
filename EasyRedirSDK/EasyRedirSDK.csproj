@@ -2,6 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Version>1.1</Version>
+    <Authors>jmknight</Authors>
+    <Company />
+    <Product>EasyRedir</Product>
+    <Description>This library is meant to act as an SDK for the EasyRedir API. I've fully mapped all endpoints as methods in the library, making them easier to use and easier to read.</Description>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/jmknight2/EasyRedirSDK</PackageProjectUrl>
+    <PackageIcon>EasyRedir_emblem.png</PackageIcon>
+    <RepositoryUrl>https://github.com/jmknight2/EasyRedirSDK</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>EasyRedir,Redirect,dotnet,opensource,EasyRedirect</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Downloads\EasyRedir_emblem.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
